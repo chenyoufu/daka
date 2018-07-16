@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RunWith(SpringRunner.class)
@@ -23,7 +22,7 @@ public class CourseMapperTests {
     private TeacherMapper teacherMapper;
 
     @Test
-//    @Transactional
+    @Transactional
     public void CourseMapperTest() {
 
         String wechat = "ihackx";
@@ -33,10 +32,7 @@ public class CourseMapperTests {
         course.setName("历史");
         course.setTeacherId(teacher.getId());
         Date startTime = new Date();
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String startTime = sdf.format(dt);
         course.setStartTime(startTime);
-        System.out.println(course.getStartTime());
         courseMapper.insertCourse(course);
 
         course = courseMapper.getCourseByNameAndTeacher("历史", teacher.getId());

@@ -20,10 +20,10 @@ public interface CourseMapper {
     @Select("SELECT * FROM courses WHERE name = #{name} AND teacher_id = #{teacherId}")
     Course getCourseByNameAndTeacher(@Param("name") String name, @Param("teacherId") Integer teacherId);
 
-    @Insert("INSERT INTO courses (tags, name, teacher_id, start_time, end_time) VALUES (#{tags}, #{name}, #{teacherId}, #{startTime}, #{endTime, jdbcType=TIMESTAMP})")
+    @Insert("INSERT INTO courses (tags, name, teacher_id, start_time, end_time) VALUES (#{tags}, #{name}, #{teacherId}, #{startTime}, #{endTime})")
     void insertCourse(Course course);
 
-    @Update("UPDATE courses SET tags = #{tags}, name = #{name} WHERE id = #{id}")
+    @Update("UPDATE courses SET tags = #{tags}, name = #{name}, start_time=#{startTime}, end_time=#{endTime} WHERE id = #{id}")
     void updateCourse(Course course);
 
 }

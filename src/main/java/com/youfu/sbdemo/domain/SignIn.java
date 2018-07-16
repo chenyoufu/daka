@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class SignIn {
     private Integer id;
-    private Integer teacherId;
     private Integer studentId;
     private Integer courseId;
     private Date createTime;
@@ -19,14 +18,6 @@ public class SignIn {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
     }
 
     public Integer getStudentId() {

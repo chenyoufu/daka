@@ -67,7 +67,4 @@ public class Course {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }
