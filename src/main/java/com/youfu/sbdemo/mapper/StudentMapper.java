@@ -20,7 +20,10 @@ public interface StudentMapper {
             "VALUES (#{name}, #{sex}, #{sn}, #{specialty}, #{grade}, #{school}, #{wechat})")
     void insertStudent(Student student);
 
-    @Update("UPDATE students SET name = #{name}, wechat = #{wechat} WHERE id = #{id}")
+    @Update("UPDATE students SET wechat = #{wechat}, " +
+            "name = #{name}, sex = #{sex}, sn = #{sn}, " +
+            "specialty = #{specialty}, grade = #{grade}, school = #{school} " +
+            "WHERE id = #{id}")
     void updateStudent(Student student);
 
 }

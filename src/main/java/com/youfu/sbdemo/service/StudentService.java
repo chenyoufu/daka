@@ -20,13 +20,35 @@ public class StudentService {
         this.studentMapper = studentMapper;
     }
 
-    public void login(String wechat, String name) {
+    @Transactional
+    public Student updateProfile(String wechat, String name, String sex, String sn, String specialty, String grade, String school) {
+        Student student = studentMapper.getStudentByWechat(wechat);
+        student.setName(name);
+        student.setSpecialty(specialty);
+        student.setSn(sn);
+        student.setSex(sex);
+        student.setGrade(grade);
+        student.setSchool(school);
+        studentMapper.updateStudent(student);
+        return student;
+    }
 
+    @Transactional
+    public Student login(String wechat) {
+        Student student = studentMapper.getStudentByWechat(wechat);
+        if (student != null) {
+            return student;
+        }
+        student = new Student();
+        student.setWechat(wechat);
+        studentMapper.insertStudent(student);
+        return student;
     }
 
     @Transactional
     public void signInCourseByWechat(String wechat, Course course) {
         Student student = studentMapper.getStudentByWechat(wechat);
+        System.out.println(student);
         signInMapper.insertSignIn(student.getId(), course.getId());
     }
 }
