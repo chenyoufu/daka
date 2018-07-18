@@ -18,7 +18,7 @@ public interface TeacherMapper {
     @Options(useGeneratedKeys = true, keyProperty = "teacher.id")
     void insertTeacher(@Param("teacher") Teacher teacher);
 
-    @Update("UPDATE teachers SET name = #{name}, wechat = #{wechat} WHERE id = #{id}")
+    @Update("UPDATE teachers SET name = #{name} WHERE id = #{id}")
     void updateTeacher(Teacher teacher);
 
 }

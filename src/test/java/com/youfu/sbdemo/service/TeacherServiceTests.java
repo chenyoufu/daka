@@ -22,7 +22,8 @@ public class TeacherServiceTests {
     @Transactional
     public void createCourseTest() {
 
-        Teacher teacher = teacherService.login("ihackz", "有福");
+        Teacher teacher = teacherService.login("ihackz");
+        teacherService.updateProfile("ihackz", "有福");
         String courseName = "C语言";
         String startTime = "2018-07-16 09:00:00";
         String tags = "";

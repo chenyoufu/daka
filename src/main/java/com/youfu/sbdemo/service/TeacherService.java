@@ -47,13 +47,20 @@ public class TeacherService {
     }
 
     @Transactional
-    public Teacher login(String wechat, String name) {
+    public Teacher updateProfile(String wechat, String name) {
+        Teacher teacher = teacherMapper.getTeacherByWechat(wechat);
+        teacher.setName(name);
+        teacherMapper.updateTeacher(teacher);
+        return teacher;
+    }
+
+    @Transactional
+    public Teacher login(String wechat) {
         Teacher teacher = teacherMapper.getTeacherByWechat(wechat);
         if (teacher != null) {
             return teacher;
         }
         teacher = new Teacher();
-        teacher.setName(name);
         teacher.setWechat(wechat);
         teacherMapper.insertTeacher(teacher);
         return teacher;
