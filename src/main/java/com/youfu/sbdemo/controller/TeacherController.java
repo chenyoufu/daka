@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TeacherController {
@@ -37,20 +39,37 @@ public class TeacherController {
 
     @PutMapping(value = "/teachers/{wechat}")
     public Result<Teacher> teacherUpdate(@PathVariable("wechat") String wechat,
-                                @RequestParam("name") String name) {
+                                         @RequestBody Map<String, Object> payload) {
+        String name = (String) payload.getOrDefault("name", "");
+        if (name.equals("")) {
+            return ResultUtil.error(100, "姓名不能为空");
+        }
         Teacher teacher = teacherService.updateProfile(wechat, name);
         return ResultUtil.success(teacher);
     }
 
     @PostMapping(value = "/teachers/{wechat}/course")
-    public Result<Course> courseAdd(@PathVariable("wechat") String wechat,
-                                    @RequestParam("courseName") String courseName,
-                                    @RequestParam("courseStartTime") String courseStartTime,
-                                    @RequestParam("courseTags") String courseTags) {
+    public Result<Object> courseAdd(@PathVariable("wechat") String wechat,
+                                    @RequestBody Map<String, Object> payload) {
+        String courseName = (String) payload.getOrDefault("courseName", "");
+        if (courseName.equals("")) {
+            return ResultUtil.error(100, "课程名不能为空");
+        }
+        String courseStartTime = (String) payload.getOrDefault("courseStartTime", "");
+        if (courseStartTime.equals("")) {
+            return ResultUtil.error(100, "上课时间不能为空");
+        }
+        String courseTags = (String) payload.getOrDefault("courseTags", "");
+
         Teacher teacher = teacherService.getTeacher(wechat);
         try {
             Course course = teacherService.createCourse(teacher, courseName, courseStartTime, courseTags);
-            return ResultUtil.success(course);
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("wechat", teacher.getWechat());
+            hashMap.put("courseName", course.getName());
+            hashMap.put("courseStartTime", course.getStartTime());
+            hashMap.put("teacherName", teacher.getName());
+            return ResultUtil.success(hashMap);
         } catch (ParseException e) {
             return ResultUtil.error(100, "时间格式错误");
         }

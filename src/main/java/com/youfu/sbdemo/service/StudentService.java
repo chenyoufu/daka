@@ -42,13 +42,12 @@ public class StudentService {
         student = new Student();
         student.setWechat(wechat);
         studentMapper.insertStudent(student);
+        student = studentMapper.getStudentByWechat(wechat);
         return student;
     }
 
     @Transactional
-    public void signInCourseByWechat(String wechat, Course course) {
-        Student student = studentMapper.getStudentByWechat(wechat);
-        System.out.println(student);
-        signInMapper.insertSignIn(student.getId(), course.getId());
+    public void signInCourseByWechat(Integer studentId, Integer courseId) {
+        signInMapper.insertSignIn(studentId, courseId);
     }
 }

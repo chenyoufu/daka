@@ -35,7 +35,7 @@ public class StudentServiceTests {
         String courseName = "C语言";
         Integer teacherId = 20;
         Course course = courseMapper.getCourseByNameAndTeacher(courseName, teacherId);
-        studentService.signInCourseByWechat(student.getWechat(), course);
+        studentService.signInCourseByWechat(student.getId(), course.getId());
 
     }
 }

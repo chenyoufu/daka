@@ -51,6 +51,7 @@ public class TeacherService {
         Teacher teacher = teacherMapper.getTeacherByWechat(wechat);
         teacher.setName(name);
         teacherMapper.updateTeacher(teacher);
+        teacher = teacherMapper.getTeacherByWechat(wechat);
         return teacher;
     }
 
@@ -58,11 +59,13 @@ public class TeacherService {
     public Teacher login(String wechat) {
         Teacher teacher = teacherMapper.getTeacherByWechat(wechat);
         if (teacher != null) {
+            System.out.println("createTIme: " + teacher.getCreateTime());
             return teacher;
         }
         teacher = new Teacher();
         teacher.setWechat(wechat);
         teacherMapper.insertTeacher(teacher);
+        teacher = teacherMapper.getTeacherByWechat(wechat);
         return teacher;
     }
 

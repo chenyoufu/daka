@@ -11,6 +11,7 @@ public class Course {
     private Date startTime;
     private Date endTime;
     private Date createTime;
+    private Date updateTime;
 
     public Course() {
     }
@@ -67,4 +68,7 @@ public class Course {
         return createTime;
     }
 
+    public Date getUpdateTime() {
+        return updateTime;
+    }
 }

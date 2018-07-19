@@ -1,6 +1,8 @@
 package com.youfu.sbdemo.domain;
 
 
+import java.util.Date;
+
 public class Student {
     private Integer id;
     private String name;
@@ -10,6 +12,8 @@ public class Student {
     private String grade; // 年级
     private String school;
     private String wechat;
+    private Date createTime;
+    private Date updateTime;
 
     public Student() {
     }
@@ -77,5 +81,13 @@ public class Student {
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
     }
 }
