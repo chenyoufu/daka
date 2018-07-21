@@ -39,9 +39,9 @@ public class TeacherService {
     }
 
     @Transactional
-    public List<Student> getTeacherCourseStudents(String courseName, String wechat){
+    public List<Student> getTeacherCourseStudents(Integer courseId, String wechat){
         Teacher teacher = teacherMapper.getTeacherByWechat(wechat);
-        Course course = courseMapper.getCourseByNameAndTeacher(courseName, teacher.getId());
+        Course course = courseMapper.getCourseByIdAndTeacher(courseId, teacher.getId());
         List<Student> students = signInMapper.getSignInStudentsByCourse(course);
         return students;
     }

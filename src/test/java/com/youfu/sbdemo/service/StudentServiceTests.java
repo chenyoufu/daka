@@ -32,9 +32,9 @@ public class StudentServiceTests {
         studentService.updateProfile(wechat, name, sex, sn, specialty, grade, school);
 
         Student student = studentService.login(wechat);
-        String courseName = "C语言";
+        Integer courseId = 31;
         Integer teacherId = 20;
-        Course course = courseMapper.getCourseByNameAndTeacher(courseName, teacherId);
+        Course course = courseMapper.getCourseByIdAndTeacher(courseId, teacherId);
         studentService.signInCourseByWechat(student.getId(), course.getId());
 
     }

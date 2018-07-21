@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface SignInMapper {
 
-    @Select("SELECT * FROM students INNER JOIN sign_in on students.id= sign_in.student_id WHERE course_id = #{id}")
+    @Select("SELECT * FROM students INNER JOIN sign_in on students.id = sign_in.student_id WHERE course_id = #{id}")
     List<Student> getSignInStudentsByCourse(Course course);
 
     @Insert("INSERT INTO sign_in (student_id, course_id) VALUES (#{studentId}, #{courseId})")

@@ -14,11 +14,14 @@ public interface CourseMapper {
     @Select("SELECT * FROM courses")
     List<Course> getAllCourses();
 
+    @Select("SELECT * FROM courses WHERE id=#{id}")
+    Course getCoursesById(Integer id);
+
     @Select("SELECT * FROM courses WHERE teacher_id=#{id}")
     List<Course> getCoursesByTeacher(Teacher teacher);
 
-    @Select("SELECT * FROM courses WHERE name = #{name} AND teacher_id = #{teacherId}")
-    Course getCourseByNameAndTeacher(@Param("name") String name, @Param("teacherId") Integer teacherId);
+    @Select("SELECT * FROM courses WHERE id = #{courseId} AND teacher_id = #{teacherId}")
+    Course getCourseByIdAndTeacher(@Param("courseId") Integer courseId, @Param("teacherId") Integer teacherId);
 
     @Insert("INSERT INTO courses (tags, name, teacher_id, start_time, end_time) VALUES (#{tags}, #{name}, #{teacherId}, #{startTime}, #{endTime})")
     void insertCourse(Course course);

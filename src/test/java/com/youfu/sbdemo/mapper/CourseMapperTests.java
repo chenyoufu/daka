@@ -35,14 +35,14 @@ public class CourseMapperTests {
         course.setStartTime(startTime);
         courseMapper.insertCourse(course);
 
-        course = courseMapper.getCourseByNameAndTeacher("历史", teacher.getId());
+        course = courseMapper.getCourseByIdAndTeacher(course.getId(), teacher.getId());
         Assert.assertEquals("历史", course.getName());
 
         course.setName("地理");
         course.setTags("选修");
         courseMapper.updateCourse(course);
 
-        course = courseMapper.getCourseByNameAndTeacher("地理", teacher.getId());
+        course = courseMapper.getCourseByIdAndTeacher(course.getId(), teacher.getId());
         Assert.assertEquals("地理", course.getName());
 
     }
